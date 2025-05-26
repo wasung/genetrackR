@@ -2,25 +2,20 @@
 % Please edit documentation in R/normalizeCounts.R
 \name{normalizeCounts}
 \alias{normalizeCounts}
-\title{Normalizes a count matrix via CPM of TPM.}
+\title{Normalizes a count matrix via CPM or TPM (optimized).}
 \usage{
 normalizeCounts(counts, txdb = NULL, method = c("CPM", "TPM"))
 }
 \arguments{
-\item{counts}{Ruwe telmatrix (matrix/data.frame) of SummarizedExperiment met assay `counts`.}
+\item{counts}{Raw count matrix (genes x samples) or SummarizedExperiment with assay 'counts'.}
 
-\item{txdb}{(optioneel) TxDb-object voor genannotatie; nodig voor TPMberekening.}
+\item{txdb}{Optional TxDb object for TPM; required if method = "TPM".}
 
-\item{method}{Normalisatiemethode: `"CPM"` (Counts Per Million) of `"TPM"` (Transcripts Per Million).}
+\item{method}{Normalization method: "CPM" (Counts Per Million) or "TPM" (Transcripts Per Million).}
 }
 \value{
-Matrix met genexpressiewaarden na normalisatie (zelfde dimensies als input).
+Normalized expression matrix.
 }
 \description{
-Normalizes a count matrix via CPM of TPM.
-}
-\details{
-*CPM*: deelt alle tellingswaarden in elke kolom door de kolomsom en vermenigvuldigt met 1e6.
-*TPM*: deelt eerst counts per gen door de genlengte (in kilobasen) en schaalt dan per miljoen .
-Bij TPM is het belangrijk om een TxDb te geven; de genlengtes worden berekend uit de totale exonlengte per gen.
+Normalizes a count matrix via CPM or TPM (optimized).
 }

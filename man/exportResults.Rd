@@ -13,11 +13,11 @@ exportResults(data, filename, path = ".", type = c("table", "plot"))
 
 \item{path}{(optioneel) Directory-pad om het bestand in op te slaan (default current dir).}
 
-\item{type}{`"table"` of `"plot"`. Bepaalt of er een CSV wordt weggeschreven of een plot file (ggplot2).}
+\item{type}{\code{"table"} of \code{"plot"}. Bepaalt of er een CSV wordt weggeschreven of een plot file (ggplot2).}
 }
 \description{
 Exports a table (CSV) or ggplot to file.
 }
 \details{
-De functie maakt de directory aan indien die nog niet bestaat. Bij type="table" wordt `write.csv` gebruikt. Bij type="plot" wordt `ggsave` gebruikt.
+De functie maakt de directory aan indien die nog niet bestaat. Bij type="table" wordt \code{write.csv} gebruikt. Bij type="plot" wordt \code{ggsave} gebruikt.
 }

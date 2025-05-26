@@ -17,9 +17,9 @@ countReads(
 
 \item{txdb}{A TxDb-object (GenomicFeatures) with GeneAnnotation.}
 
-\item{ignore_strand}{Logic; `TRUE` counts independently of strand (default).}
+\item{ignore_strand}{Logic; \code{TRUE} counts independently of strand (default).}
 
-\item{single_end}{Logisch; `TRUE` for single read (default).}
+\item{single_end}{Logisch; \code{TRUE} for single read (default).}
 
 \item{mode}{Overlap-modus voor summarizeOverlaps (bijv. "Union", default).}
 }

@@ -18,7 +18,7 @@ plotGeneExpression(
 
 \item{sampleID}{Karakter; de sample-naam om de expressie van alle genen in dat sample te tonen.}
 
-\item{normalized}{Logisch; `TRUE` voor genormaliseerde data, `FALSE` voor ruwe counts.}
+\item{normalized}{Logisch; \code{TRUE} voor genormaliseerde data, \code{FALSE} voor ruwe counts.}
 }
 \value{
 Een ggplot-object (invisible) van het gemaakte diagram.
@@ -27,7 +27,7 @@ Een ggplot-object (invisible) van het gemaakte diagram.
 Visualizes gene expression as barplots.
 }
 \details{
-Geeft een barplot terug. Indien `geneID` is opgegeven, plott de expressie van dat gen over de kolommen (samples).
-Indien `sampleID` is opgegeven, toont het de top 20 meest expressieve genen in dat sample.
+Geeft een barplot terug. Indien \code{geneID} is opgegeven, plott de expressie van dat gen over de kolommen (samples).
+Indien \code{sampleID} is opgegeven, toont het de top 20 meest expressieve genen in dat sample.
 Indien beide opgegeven zijn of geen, wordt een foutmelding gegenereerd.
 }
