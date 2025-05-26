@@ -1,4 +1,3 @@
-#genetrackR
 genetrackR is an R package for RNA-seq data analysis (FASTQ/BAM). It counts reads per gene from BAM files, performs normalization (CPM/TPM), and visualizes gene expression. By leveraging Bioconductor packages, it enables efficient and reproducible processing of large datasets.
 
 ##Installation

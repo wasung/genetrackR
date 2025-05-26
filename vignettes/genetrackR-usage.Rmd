@@ -1,0 +1,82 @@
+---
+title: "Using genetrackR with airway RNA-seq data"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using genetrackR with airway RNA-seq data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(genetrackR)
+library(airway)
+library(GenomicFeatures)
+library(SummarizedExperiment)
+library(ggplot2)
+library(R.utils)
+```
+
+## Introduction
+
+This vignette demonstrates how to use the `genetrackR` package for gene-level RNA-seq analysis using real data from the `airway` package. We walk through the full analysis pipeline: counting reads, normalization, visualization, and exporting results.
+
+## 1. Prepare input data
+
+We use a BAM file included in the `airway` package and a gene annotation GTF file that comes with this package.
+
+```{r}
+bam_file <- system.file("extdata", "SRR1039508_subset.bam", package = "airway")
+
+gtf_gz <- system.file("extdata", "Homo_sapiens.GRCh38.114.gtf.gz", package = "genetrackR")
+gtf_file <- file.path(tempdir(), "annotation.gtf")
+if (!file.exists(gtf_file)) {
+  R.utils::gunzip(gtf_gz, destname = gtf_file, remove = FALSE)
+}
+```
+
+## 2. Create TxDb from GTF annotation
+
+```{r}
+txdb <- GenomicFeatures::makeTxDbFromGFF(gtf_file, format = "gtf")
+```
+
+## 3. Count reads per gene
+
+```{r}
+se <- countReads(bam_files = bam_file, txdb = txdb)
+se
+```
+
+## 4. Normalize counts to TPM
+
+```{r}
+raw_counts <- assay(se, "counts")
+tpm <- normalizeCounts(raw_counts, txdb = txdb, method = "TPM")
+head(tpm)
+```
+
+## 5. Visualize gene expression
+
+We show gene expression of the first gene across all samples, and the top 20 expressed genes in the first sample.
+
+```{r}
+p1 <- plotGeneExpression(tpm, geneID = rownames(tpm)[1])
+p2 <- plotGeneExpression(tpm, sampleID = colnames(tpm)[1])
+```
+
+## 6. Export results
+
+```{r}
+exportResults(tpm, filename = "counts_TPM.csv", path = tempdir(), type = "table")
+exportResults(p1, filename = "gene_plot.png", path = tempdir(), type = "plot")
+```
+
+The resulting files can be found in your temporary directory.
+
+## Conclusion
+
+With `genetrackR`, you can analyze RNA-seq BAM files, normalize gene counts, generate expression plots, and export results — all in a streamlined, reproducible workflow using standard Bioconductor tools.
